@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0614">
+<meta name="robots" content="noindex, nofollow">
+<title>Private Piano Concert ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ff9ecb;--violet:#a78bfa;--gold:#f5d38a;--txt:#f6eefc;--mut:#bcaed6;--line:rgba(255,255,255,.13)}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{min-height:100vh;min-height:100dvh;background:radial-gradient(120% 90% at 50% 0%,#1f1040 0%,#0e0820 45%,#07040f 100%);background-attachment:fixed;color:var(--txt);font:16px/1.55 'Manrope',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;overflow-x:hidden;padding:max(20px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* фон */
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(72px);opacity:.5;width:min(72vw,540px);aspect-ratio:1;animation:float 20s ease-in-out infinite alternate}
+.o1{background:#ff7eb6;top:-12%;left:-18%}
+.o2{background:#7c5cff;bottom:-16%;right:-22%;animation-delay:-7s}
+.o3{background:#f5c96a;top:46%;left:38%;width:min(46vw,340px);opacity:.2;animation-delay:-13s}
+@keyframes float{to{transform:translate3d(7vw,-6vh,0) scale(1.18)}}
+.star{position:absolute;border-radius:50%;background:#fff;animation:tw 4s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.08}50%{opacity:.85}}
+
+main{position:relative;z-index:1;max-width:720px;margin:0 auto}
+
+/* заголовок */
+header{text-align:center;padding:clamp(30px,9vw,80px) 0 clamp(26px,7vw,48px);animation:rise 1.4s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(16px);filter:blur(12px)}}
+h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(2.2rem,10vw,4.2rem);line-height:1.1;letter-spacing:.01em;background:linear-gradient(100deg,#ffd9ec,#f5d38a 48%,#c9b3ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin-top:12px;color:var(--mut);font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:clamp(1.15rem,4.6vw,1.5rem);letter-spacing:.03em}
+.rule{width:64px;height:2px;margin:22px auto 0;border-radius:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+
+/* карточки */
+.list{display:grid;gap:clamp(16px,4vw,28px)}
+.card{position:relative;padding:clamp(14px,4vw,26px);border-radius:28px;background:linear-gradient(160deg,rgba(255,255,255,.1),rgba(255,255,255,.03));border:1px solid var(--line);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 24px 50px -22px rgba(0,0,0,.7);opacity:0;transform:translateY(28px);transition:opacity .9s,transform .9s cubic-bezier(.2,.7,.2,1),border-color .35s,box-shadow .35s}
+.card>*{transition:filter .9s}
+.card:not(.in)>*{filter:blur(10px)}
+.card.in{opacity:1;transform:none}
+.card:hover,.card:focus-within{border-color:rgba(255,158,203,.5);box-shadow:0 0 0 1px rgba(255,158,203,.22),0 26px 60px -18px rgba(167,139,250,.55)}
+.card.feat{border-color:rgba(245,211,138,.38)}
+.card.playing{border-color:rgba(245,211,138,.7);box-shadow:0 0 34px rgba(245,211,138,.2),0 26px 60px -18px rgba(255,158,203,.5)}
+
+.head{display:flex;gap:14px;align-items:flex-start;margin-bottom:16px}
+.num{flex:none;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-family:'Cormorant Garamond',Georgia,serif;font-size:1.15rem;color:var(--gold);border:1px solid rgba(245,211,138,.45);background:rgba(245,211,138,.08)}
+.head h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(1.45rem,5.6vw,1.95rem);line-height:1.15}
+.by{color:var(--pink);font-size:.88rem;margin-top:3px}
+.desc{color:var(--mut);font-size:.95rem;margin-top:8px;font-style:italic}
+.eq{margin-left:auto;display:flex;gap:3px;align-items:flex-end;height:18px;padding-top:2px;opacity:0;transition:opacity .3s}
+.eq i{width:3px;height:100%;border-radius:2px;background:var(--gold);transform-origin:bottom;animation:eq 1s ease-in-out infinite;animation-play-state:paused}
+.eq i:nth-child(2){animation-delay:-.4s}.eq i:nth-child(3){animation-delay:-.7s}
+.playing .eq{opacity:1}.playing .eq i{animation-play-state:running}
+@keyframes eq{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
+
+/* видео */
+.stage{position:relative;border-radius:20px;overflow:hidden;background:#000;aspect-ratio:16/9;max-height:78vh;width:100%;box-shadow:inset 0 0 0 1px var(--line)}
+.stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+.big{position:absolute;inset:0;width:100%;border:0;background:linear-gradient(transparent 40%,rgba(10,6,20,.45));display:grid;place-items:center}
+.big span{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,rgba(255,158,203,.92),rgba(167,139,250,.92));box-shadow:0 0 0 8px rgba(255,255,255,.12),0 10px 34px rgba(167,139,250,.6);transition:transform .35s,opacity .35s}
+.big:hover span{transform:scale(1.07)}
+.playing .big span{opacity:0;transform:scale(.8)}
+.spin{position:absolute;top:50%;left:50%;width:34px;height:34px;margin:-17px;border-radius:50%;border:3px solid rgba(255,255,255,.2);border-top-color:var(--gold);animation:sp .8s linear infinite;opacity:0;pointer-events:none}
+.load.playing .spin,.load .spin{opacity:1}
+@keyframes sp{to{transform:rotate(360deg)}}
+svg{width:26px;height:26px;fill:#fff;display:block}
+.card:not(.playing) .i-pause,.playing .i-play{display:none}
+
+/* управление */
+.ctrl{display:flex;align-items:center;gap:12px;margin-top:14px}
+.pp,.fs{flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;border:0}
+.pp{background:linear-gradient(135deg,var(--pink),var(--violet));box-shadow:0 6px 20px rgba(167,139,250,.5);transition:transform .2s}
+.pp:active{transform:scale(.92)}
+.fs{width:44px;height:44px;background:rgba(255,255,255,.08);border:1px solid var(--line)}
+.fs svg{width:20px;height:20px}
+.mid{flex:1;min-width:0}
+.times{display:flex;justify-content:space-between;color:var(--mut);font-size:.8rem;font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;cursor:pointer;display:block}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:6px;background:linear-gradient(90deg,var(--gold),var(--pink) var(--p,0%),rgba(255,255,255,.16) var(--p,0%))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;margin-top:-6px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(255,158,203,.3),0 0 12px var(--pink)}
+input[type=range]::-moz-range-track{height:6px;border-radius:6px;background:rgba(255,255,255,.16)}
+input[type=range]::-moz-range-progress{height:6px;border-radius:6px;background:linear-gradient(90deg,var(--gold),var(--pink))}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(255,158,203,.3),0 0 12px var(--pink)}
+.msg{display:none;margin-top:12px;font-size:.88rem;color:var(--pink)}
+.msg a{color:var(--gold)}
+.err .msg{display:block}
+
+/* подпись */
+footer{display:flex;justify-content:center;margin-top:clamp(28px,7vw,48px)}
+.sig{padding:11px 22px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:var(--mut);font-size:.9rem;text-align:center}
+
+@media(min-width:640px){.big span{width:88px;height:88px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="bg" id="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+
+<main>
+  <header>
+    <h1>Private Piano Concert ✨</h1>
+    <p class="sub">Специально для тебя :3</p>
+    <div class="rule"></div>
+  </header>
+  <section class="list" id="list" aria-label="Программа концерта"></section>
+  <footer><div class="sig">Записано с любовью и вдохновением 🎹❤️</div></footer>
+</main>
+
+<script>
+const TRACKS=[
+ {n:'I',title:'«Лунная соната» (Часть 1)',by:'Л. В. Бетховен',desc:'Сделано с любовью, из лвпг!',src:'https://www.dropbox.com/scl/fi/1w4a2brgcut6rpx12gyf4/M1.mp4?rlkey=73fbp518403844i9swxspqnnj&raw=1'},
+];
+const PLAY='<svg class="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+const PAUSE='<svg class="i-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+const FULL='<svg viewBox="0 0 24 24"><path d="M5 5h5v2H7v3H5V5zm9 0h5v5h-2V7h-3V5zM5 14h2v3h3v2H5v-5zm12 0h2v5h-5v-2h3v-3z"/></svg>';
+const fmt=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+
+// звёзды
+const bg=document.getElementById('bg');
+for(let i=0;i<55;i++){const s=document.createElement('i');s.className='star';const z=Math.random()*1.6+.8;
+ s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${z}px;height:${z}px;animation-delay:${-Math.random()*4}s;animation-duration:${3+Math.random()*4}s`;bg.appendChild(s)}
+
+const list=document.getElementById('list');
+const io='IntersectionObserver'in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1}):null;
+
+TRACKS.forEach((t,i)=>{
+ const c=document.createElement('article');
+ c.className='card'+(t.feat?' feat':'');
+ c.innerHTML=`
+  <div class="head">
+   <div class="num" aria-hidden="true">${t.n}</div>
+   <div><h2>${t.title}</h2>${t.by?`<p class="by">${t.by}</p>`:''}<p class="desc">${t.desc}</p></div>
+   <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+  </div>
+  <div class="stage">
+   <video src="${t.src}" preload="metadata" playsinline></video>
+   <button class="big" aria-label="Воспроизвести или поставить на паузу"><span>${PLAY}${PAUSE}</span></button>
+   <div class="spin"></div>
+  </div>
+  <div class="ctrl">
+   <button class="pp" aria-label="Играть / пауза">${PLAY}${PAUSE}</button>
+   <div class="mid">
+    <input type="range" min="0" max="1000" value="0" aria-label="Перемотка">
+    <div class="times"><span class="cur">0:00</span><span class="dur">0:00</span></div>
+   </div>
+   <button class="fs" aria-label="На весь экран">${FULL}</button>
+  </div>
+  <p class="msg">Не удалось загрузить видео. <a href="${t.src}" target="_blank" rel="noopener">Открыть напрямую</a></p>`;
+ list.appendChild(c);
+ setup(c);
+ io?io.observe(c):c.classList.add('in');
+});
+
+function setup(c){
+ const $=q=>c.querySelector(q),v=$('video'),rng=$('input'),stage=$('.stage');
+ let seeking=false;
+ const paint=()=>{const p=v.duration?v.currentTime/v.duration*1000:0;if(!seeking)rng.value=p;rng.style.setProperty('--p',(rng.value/10)+'%');$('.cur').textContent=fmt(v.currentTime)};
+ const toggle=()=>v.paused?v.play().catch(()=>c.classList.add('err')):v.pause();
+ $('.big').onclick=$('.pp').onclick=toggle;
+ $('.fs').onclick=()=>{(v.requestFullscreen||v.webkitRequestFullscreen||v.webkitEnterFullscreen||(()=>{})).call(v)};
+ v.onplay=()=>{document.querySelectorAll('video').forEach(o=>{if(o!==v)o.pause()});c.classList.add('playing')};
+ v.onpause=v.onended=()=>c.classList.remove('playing');
+ v.onloadedmetadata=()=>{$('.dur').textContent=fmt(v.duration);if(v.videoWidth)stage.style.aspectRatio=v.videoWidth+'/'+v.videoHeight;paint()};
+ v.ontimeupdate=paint;
+ v.onwaiting=()=>c.classList.add('load');
+ v.onplaying=v.oncanplay=()=>c.classList.remove('load');
+ v.onerror=()=>{c.classList.remove('load');c.classList.add('err')};
+ rng.oninput=()=>{seeking=true;if(v.duration)v.currentTime=rng.value/1000*v.duration;paint()};
+ rng.onchange=()=>{seeking=false};
+}
+</script>
+</body>
+</html>
